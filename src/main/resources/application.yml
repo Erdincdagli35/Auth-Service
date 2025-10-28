@@ -1,0 +1,23 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${PGHOST:5432}/${PGDATABASE}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  redis:
+    host: ${REDISHOST:localhost}
+    port: ${REDISPORT:6379}
+    password: ${REDISPASSWORD:}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-this-in-prod}
+    access-exp-ms: ${JWT_ACCESS_EXP_MS:900000}       # 15 min
+    refresh-exp-ms: ${JWT_REFRESH_EXP_MS:1209600000} # 14 days
