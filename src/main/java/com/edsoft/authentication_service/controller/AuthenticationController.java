@@ -15,6 +15,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
 public class AuthenticationController {
 
     private final AppUserRepository appUserRepository;
@@ -22,11 +23,8 @@ public class AuthenticationController {
     private final JwtUtil jwtUtil;
     private final RefreshTokenService refreshTokenService;
 
-    @Value("${app.jwt.access-exp-ms}")
-    private long accessExpMs;
-
-    @Value("${app.jwt.refresh-exp-ms}")
-    private long refreshExpMs;
+    private long accessExpMs = 900_000;
+    private long refreshExpMs = 1_209_600_000;
 
     public AuthenticationController(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, RefreshTokenService refreshTokenService) {
         this.appUserRepository = appUserRepository;
@@ -96,4 +94,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(Map.of("msg", "Logged out"));
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<?> list() {
+        List<AppUser> allUsers = appUserRepository.findAll();
+        return ResponseEntity.ok(allUsers);
+    }
 }

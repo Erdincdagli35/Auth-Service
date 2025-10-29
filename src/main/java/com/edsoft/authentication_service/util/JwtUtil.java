@@ -8,7 +8,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @Value("${app.jwt.secret}")
+    @Value("${app.jwt.secret:change-this-in-dev}")
     private String secret;
 
     public String generateToken(String subject, long expMs) {

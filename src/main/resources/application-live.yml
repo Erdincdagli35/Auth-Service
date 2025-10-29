@@ -1,0 +1,17 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${PGHOST:5432}/${PGDATABASE}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  redis:
+    host: ${REDISHOST:localhost}
+    port: ${REDISPORT:6379}
+    password: ${REDISPASSWORD:}
