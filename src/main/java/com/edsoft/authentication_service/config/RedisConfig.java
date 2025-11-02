@@ -3,10 +3,13 @@ package com.edsoft.authentication_service.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.*;
+import org.springframework.data.redis.connection.RedisPassword;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.*;
-import org.springframework.data.redis.serializer.*;
+import org.springframework.data.redis.core.StringRedisTemplate;
+
+import java.time.Duration;
 
 @Configuration
 public class RedisConfig {
@@ -19,15 +22,17 @@ public class RedisConfig {
 
         RedisStandaloneConfiguration conf = new RedisStandaloneConfiguration(host, port);
         if (password != null && !password.isBlank()) conf.setPassword(RedisPassword.of(password));
-        return new LettuceConnectionFactory(conf);
+
+        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
+                .commandTimeout(Duration.ofSeconds(2))
+                .shutdownTimeout(Duration.ofMillis(100))
+                .build();
+        return new LettuceConnectionFactory(conf, clientConfig);
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory cf) {
-        RedisTemplate<String, Object> rt = new RedisTemplate<>();
-        rt.setConnectionFactory(cf);
-        rt.setKeySerializer(new StringRedisSerializer());
-        rt.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        return rt;
+    public StringRedisTemplate stringRedisTemplate(LettuceConnectionFactory factory) {
+        StringRedisTemplate template = new StringRedisTemplate(factory);
+        return template;
     }
 }

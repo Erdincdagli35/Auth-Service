@@ -15,7 +15,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin
+@CrossOrigin("https://beachorder.up.railway.app")
 public class AuthenticationController {
 
     private final AppUserRepository appUserRepository;
@@ -58,7 +58,7 @@ public class AuthenticationController {
 
         String access = jwtUtil.generateToken(existing.getUsername(), accessExpMs);
         String refresh = UUID.randomUUID().toString();
-        refreshTokenService.store(refresh, existing.getId(), refreshExpMs);
+        //refreshTokenService.store(refresh, existing.getId(), refreshExpMs);
 
         return ResponseEntity.ok(Map.of(
                 "accessToken", access,

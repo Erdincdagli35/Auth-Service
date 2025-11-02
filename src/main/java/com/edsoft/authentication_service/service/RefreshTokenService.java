@@ -2,15 +2,16 @@ package com.edsoft.authentication_service.service;
 
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Optional;
 
 @Service
 public class RefreshTokenService {
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
-    public RefreshTokenService(RedisTemplate<String, Object> redisTemplate) {
+    public RefreshTokenService(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
