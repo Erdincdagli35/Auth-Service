@@ -1,11 +1,9 @@
-# common (tüm profiller için)
 spring:
   jpa:
     show-sql: true
 
 ---
 
-# local profile için
 spring:
   config:
     activate:
@@ -19,7 +17,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
 
   redis:

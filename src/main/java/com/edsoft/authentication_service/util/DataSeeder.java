@@ -15,10 +15,10 @@ public class DataSeeder {
     CommandLineRunner seed(AppUserRepository repo, PasswordEncoder encoder) {
         return args -> {
             if (repo.findByUsername("admin").isEmpty()) {
-                repo.save(new AppUser(null, "admin", encoder.encode("admin123"), Set.of("ROLE_ADMIN")));
+                repo.save(new AppUser(null, "admin", encoder.encode("123"), Set.of("ROLE_ADMIN")));
             }
             if (repo.findByUsername("demo").isEmpty()) {
-                repo.save(new AppUser(null, "beach", encoder.encode("123"), Set.of("ROLE_CUSTOMER")));
+                repo.save(new AppUser(null, "customer", encoder.encode("123"), Set.of("ROLE_CUSTOMER")));
             }
         };
     }
