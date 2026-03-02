@@ -23,4 +23,4 @@ spring:
   redis:
     host: ${REDISHOST:redis.railway.internal}
     port: ${REDISPORT:6379}
-    password: ${REDISPASSWORD:koKJhmbyFYxlwpMGgbyCbxEYaBnDbwnT}
+    password: ${REDISPASSWORD:pOJZQxJeDEaQnWlJwGdtMrEDmkyaTSZG}
