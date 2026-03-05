@@ -18,7 +18,7 @@ public class DataSeeder {
                 repo.save(new AppUser(null, "admin", encoder.encode("123"), Set.of("ROLE_ADMIN")));
             }
             if (repo.findByUsername("waiter").isEmpty()) {
-                repo.save(new AppUser(null, "waiter", encoder.encode("123"), Set.of("ROLE_CUSTOMER")));
+                repo.save(new AppUser(null, "waiter", encoder.encode("123"), Set.of("ROLE_WAITER")));
             }
             if (repo.findByUsername("customer").isEmpty()) {
                 repo.save(new AppUser(null, "customer", encoder.encode("123"), Set.of("ROLE_CUSTOMER")));
